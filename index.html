@@ -482,5 +482,54 @@
             }
         </pre>
     </div>
+</style>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .forum-container { max-width: 800px; margin: auto; }
+    .category { background: #f4f4f4; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    .label { display: inline-block; padding: 5px 10px; margin-right: 5px; background: #007bff; color: white; border-radius: 3px; }
+    .post { background: #fff; padding: 10px; border: 1px solid #ddd; margin-top: 5px; border-radius: 5px; padding: 10px; }
+    .reply { margin-left: 20px; background: #eef; padding: 5px; border-radius: 5px; margin-top: 5px; }
+    .input-box { width: 100%; padding: 8px; margin-top: 10px; }
+    button { padding: 8px 12px; margin-top: 5px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 3px; }
+    button:hover { background: #218838; }
+</style>
+
+<script>
+    function addPost(categoryId) {
+        let input = document.getElementById("input-" + categoryId);
+        let text = input.value.trim();
+        if (text) {
+            let postContainer = document.getElementById("posts-" + categoryId);
+            let newPost = document.createElement("div");
+            newPost.className = "post";
+            newPost.innerHTML = `<strong>User:</strong> ${text} <br><button onclick='addReply(this)'>Reply</button>`;
+            postContainer.appendChild(newPost);
+            input.value = "";
+        }
+    }
+
+    function addReply(button) {
+        let replyText = prompt("Enter your reply:");
+        if (replyText) {
+            let replyDiv = document.createElement("div");
+            replyDiv.className = "reply";
+            replyDiv.innerHTML = `<strong>Reply:</strong> ${replyText}`;
+            button.parentElement.appendChild(replyDiv);
+        }
+    }
+</script>
+<div class="forum-container">
+    <h2>Discussion Forum</h2>
+    
+    <div class="category" id="public">
+        <h3>Ask to Friends <span class="label">Chat on any topics</span></h3>
+        <div id="posts-public"></div>
+        <input type="text" id="input-public" class="input-box" placeholder="Start a discussion...">
+        <button onclick="addPost('public')">Post</button>
+    </div>
+    
+   
+</div>
 </body>
 </html>
