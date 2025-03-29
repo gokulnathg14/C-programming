@@ -64,7 +64,7 @@
         </tr>
     </table>
   
-
+    
      <h1>Module I </h1>  
     <div class="container">
        <div class="box">
@@ -77,6 +77,7 @@
             Conditional Statements – if statements - switch -Iterative Statements – for – while - do- while.</P>
        </div>
     </div>
+    <div class="container">
     <h2 style="color: red; margin: 10px; font-size: 35px;"> Brief Notes </h2>
     <h2>Character Set</h2>
     <p>The set of valid characters used in a programming language, including letters, digits, special symbols, and white spaces.</p>
@@ -138,6 +139,348 @@
         <li><strong>While Loop:</strong> Repeats as long as a condition is true.</li>
         <li><strong>Do-While Loop:</strong> Executes the block at least once, then checks the condition.</li>
     </ul>
-      
+    </div>
+    <h1>Module II </h1>  
+    <div class="container">
+       <div class="box">
+            <h3 style= "text-align: center;">Syllabus</h3>
+            <P>Need for functions - Library Functions – User-defined Functions - Elements of User-defined 
+                Functions - Definition of Functions - Return Values and their Types - Function
+                Calls - Function Declaration - Category of Functions - No Arguments and No Return Values -
+                Arguments but no return values - Arguments with return values - No Arguments but Returns 
+                a Value – Recursion – Scope - Visibility and Lifetime of variables - Nested Functions</P>
+       </div>
+    </div>
+    <div class="container">
+        <h2>Functions in C</h2>
+
+        <h3>Need for Functions</h3>
+        <p>Functions help in modular programming by breaking a program into smaller, manageable parts. They improve code readability, reusability, and maintainability.</p>
+
+        <h3>Library Functions</h3>
+        <p>These are pre-defined functions available in standard C libraries, such as <code>printf()</code>, <code>scanf()</code>, <code>sqrt()</code>, and <code>strlen()</code>.</p>
+
+        <h3>User-defined Functions</h3>
+        <p>Functions created by the user to perform specific tasks. They are defined using the <code>return_type function_name(parameters) { }</code> syntax.</p>
+
+        <h3>Elements of User-defined Functions</h3>
+        <ul>
+            <li><strong>Function Definition:</strong> The actual implementation of the function.</li>
+            <li><strong>Function Call:</strong> Invoking the function in the program.</li>
+            <li><strong>Function Declaration:</strong> Declaring the function before calling it.</li>
+        </ul>
+
+        <h3>Return Values and Their Types</h3>
+        <p>Functions can return values of different data types, such as <code>int</code>, <code>float</code>, or <code>void</code> (no return value).</p>
+
+        <h3>Category of Functions</h3>
+        <ul>
+            <li><strong>No Arguments and No Return Values:</strong> Functions that take no parameters and do not return a value.</li>
+            <li><strong>Arguments but No Return Values:</strong> Functions that take parameters but do not return a value.</li>
+            <li><strong>Arguments with Return Values:</strong> Functions that take parameters and return a value.</li>
+            <li><strong>No Arguments but Returns a Value:</strong> Functions that return a value but do not take parameters.</li>
+        </ul>
+
+        <h3>Recursion</h3>
+        <p>A function calling itself to solve a problem in a repetitive manner. Example:</p>
+        <pre>
+            int factorial(int n) {
+                 if (n == 0) return 1;
+                 return n * factorial(n - 1);
+            }
+        </pre>
+
+        <h3>Scope, Visibility, and Lifetime of Variables</h3>
+        <ul>
+            <li><strong>Local Variables:</strong> Declared inside a function and accessible only within that function.</li>
+            <li><strong>Global Variables:</strong> Declared outside all functions and accessible throughout the program.</li>
+            <li><strong>Static Variables:</strong> Retain their value between function calls.</li>
+        </ul>
+
+        <h3>Nested Functions</h3>
+        <p>A function defined within another function. In C, true nested functions are not allowed, but function calls within functions are commonly used.</p>
+    </div>
+    <h1>Module III </h1>  
+    <div class="container">
+       <div class="box">
+            <h3 style= "text-align: center;">Syllabus</h3>
+            <P>One-dimensional Arrays: Declaration of One-dimensional Arrays - Initialization of One dimensional Arrays - Example programs - Bubble sort - Linear search - Binary search.
+                Two-dimensional Arrays: Declaration of Two-dimensional Arrays - Initialization of Two dimensional Arrays - Example programs - Matrix Multiplication - Transpose of a matrix. 
+                Strings in C: character arrays and string manipulation functions - Example Programs
+                (with and without using built-in string functions) - Passing arrays and strings to functions</P>
+       </div>
+    </div>
+    <div class="container">
+        <h2>Arrays and Strings in C</h2>
+
+        <h3>One-dimensional Arrays</h3>
+        <p>Arrays store multiple elements of the same type in contiguous memory locations. A one-dimensional array is declared as:</p>
+        <pre>int arr[10];</pre>
+
+        <h3>Initialization of One-dimensional Arrays</h3>
+        <p>Arrays can be initialized during declaration:</p>
+        <pre>int arr[5] = {1, 2, 3, 4, 5};</pre>
+
+        <h3>Example Programs</h3>
+        <ul>
+            <li><strong>Bubble Sort:</strong> Sorting elements by repeatedly swapping adjacent elements.</li>
+            <pre>
+            void bubbleSort(int arr[], int n) {
+            for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            }
+            </pre>
+
+            <li><strong>Linear Search:</strong> Searching an element sequentially in an array.</li>
+            <pre>
+            int linearSearch(int arr[], int n, int key) {
+             for (int i = 0; i < n; i++)
+               if (arr[i] == key)
+              return i;
+            return -1;
+            }
+            </pre>
+
+            <li><strong>Binary Search:</strong> Searching in a sorted array using the divide and conquer method.</li>
+            <pre>
+            int binarySearch(int arr[], int left, int right, int key) {
+            while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == key) return mid;
+            if (arr[mid] < key) left = mid + 1;
+            else right = mid - 1;
+            }
+            return -1;
+            }
+            </pre>
+        </ul>
+
+        <h3>Two-dimensional Arrays</h3>
+        <p>A two-dimensional array is declared as:</p>
+        <pre>int matrix[3][3];</pre>
+
+        <h3>Initialization of Two-dimensional Arrays</h3>
+        <p>They can be initialized during declaration:</p>
+        <pre>int matrix[2][2] = {{1, 2}, {3, 4}};</pre>
+
+        <h3>Example Programs</h3>
+        <ul>
+            <li><strong>Matrix Multiplication:</strong> Multiplying two matrices.</li>
+            <pre>
+            void multiplyMatrices(int a[][2], int b[][2], int result[][2], int size) {
+            for (int i = 0; i < size; i++)
+               for (int j = 0; j < size; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < size; k++)
+                result[i][j] += a[i][k] * b[k][j];
+        }
+        }
+            </pre>
+
+            <li><strong>Transpose of a Matrix:</strong> Swapping rows and columns.</li>
+            <pre>
+            void transpose(int matrix[][3], int transposed[][3], int size) {
+             for (int i = 0; i < size; i++)
+               for (int j = 0; j < size; j++)
+              transposed[j][i] = matrix[i][j];
+            }
+            </pre>
+        </ul>
+
+        <h3>Strings in C</h3>
+        <p>Strings are character arrays that end with a null character (<code>\0</code>).</p>
+        <pre>char str[] = "Hello";</pre>
+
+        <h3>String Manipulation Functions</h3>
+        <ul>
+            <li><strong>strlen(str):</strong> Returns the length of a string.</li>
+            <li><strong>strcpy(dest, src):</strong> Copies one string to another.</li>
+            <li><strong>strcmp(str1, str2):</strong> Compares two strings.</li>
+            <li><strong>strcat(str1, str2):</strong> Concatenates two strings.</li>
+        </ul>
+
+        <h3>Example Programs</h3>
+        <ul>
+            <li><strong>String Length without using Built-in Functions:</strong></li>
+            <pre>
+            int stringLength(char str[]) {
+            int length = 0;
+            while (str[length] != '\0') length++;
+            return length;
+            }
+            </pre>
+
+            <li><strong>Passing Arrays and Strings to Functions:</strong></li>
+            <pre>
+            void printString(char str[]) {
+             printf("%s", str);
+            }
+            </pre>
+        </ul>
+    </div>
+    <h1>Module IV </h1>  
+    <div class="container">
+       <div class="box">
+            <h3 style= "text-align: center;">Syllabus</h3>
+            <P>Structures: Introduction -Defining a structure - declaring structure variables - Accessing 
+                structure members - Structure initialization - Array of structures - Nested Structure.
+                Introduction to pointers and their significance - Pointer arithmetic and pointer operations.
+                Dynamic memory allocation (malloc, calloc, realloc, free) - Pointer and array relationship -
+                Pointers to functions and their applications - Call by value and call by reference.
+                File input/output operations (fopen,fclose,fread,fwrite) - Error handling with file operations.</P>
+       </div>  
+
+       <div class="container">
+        <h2>Structures, Pointers, and File I/O in C</h2>
+
+        <h3>Structures in C</h3>
+        <p>A structure is a user-defined data type that allows grouping related data of different types.</p>
+        
+        <h4>Defining a Structure</h4>
+        <pre>
+            struct Student {
+            char name[50];
+            int age;
+            float marks;
+            };
+        </pre>
+
+        <h4>Declaring Structure Variables</h4>
+        <pre>
+        struct Student s1;
+        </pre>
+
+        <h4>Accessing Structure Members</h4>
+        <pre>
+            s1.age = 20;
+            printf("Age: %d", s1.age);
+        </pre>
+
+        <h4>Structure Initialization</h4>
+        <pre>
+            struct Student s2 = {"John", 21, 85.5};
+        </pre>
+
+        <h4>Array of Structures</h4>
+        <pre>
+        struct Student students[3];
+        </pre>
+
+        <h4>Nested Structures</h4>
+        <pre>
+        struct Address {
+            char city[50];
+            int zip;
+        };
+        struct Student {
+            char name[50];
+            struct Address addr;
+        };
+        </pre>
+
+        <h3>Pointers in C</h3>
+        <p>Pointers store memory addresses, enabling efficient data manipulation and dynamic memory allocation.</p>
+
+        <h4>Pointer Declaration</h4>
+        <pre>
+        int *ptr;
+        </pre>
+
+        <h4>Pointer Arithmetic</h4>
+        <pre>
+        ptr++;
+        ptr--;
+        </pre>
+
+        <h3>Dynamic Memory Allocation</h3>
+        <p>Allocating memory dynamically at runtime using functions from <code>&lt;stdlib.h&gt;</code>.</p>
+
+        <h4>Memory Allocation Functions</h4>
+        <ul>
+            <li><code>malloc()</code>: Allocates memory but does not initialize.</li>
+            <li><code>calloc()</code>: Allocates memory and initializes to zero.</li>
+            <li><code>realloc()</code>: Resizes previously allocated memory.</li>
+            <li><code>free()</code>: Deallocates memory.</li>
+        </ul>
+
+        <h4>Example of Dynamic Memory Allocation</h4>
+        <pre>
+        int *arr = (int*)malloc(5 * sizeof(int));
+        free(arr);
+        </pre>
+
+        <h3>Pointers and Arrays</h3>
+        <p>Pointers can be used to access array elements efficiently.</p>
+        <pre>
+        int arr[] = {1, 2, 3};
+        int *ptr = arr;  // Points to first element
+        printf("%d", *(ptr + 1)); // Access second element
+        </pre>
+
+        <h3>Pointers to Functions</h3>
+        <p>Pointers can store addresses of functions, allowing function calls through pointers.</p>
+        <pre>
+        void hello() { printf("Hello, World!"); }
+        void (*funcPtr)() = hello;
+        funcPtr(); // Calls hello()
+        </pre>
+
+        <h3>Call by Value and Call by Reference</h3>
+        <p>Functions can receive arguments either by value (copy) or by reference (address).</p>
+
+        <h4>Call by Value Example</h4>
+        <pre>
+        void increment(int x) {
+            x++;
+        }
+        </pre>
+
+        <h4>Call by Reference Example</h4>
+        <pre>
+        void increment(int *x) {
+            (*x)++;
+        }
+                </pre>
+
+        <h3>File Input/Output Operations</h3>
+        <p>Files in C are handled using the <code>FILE</code> pointer and functions from <code>&lt;stdio.h&gt;</code>.</p>
+
+        <h4>Opening and Closing a File</h4>
+        <pre>
+        FILE *fp = fopen("data.txt", "r");
+        fclose(fp);
+        </pre>
+
+        <h4>Reading and Writing Files</h4>
+        <pre>
+            // Writing to a file
+            FILE *fp = fopen("data.txt", "w");
+            fprintf(fp, "Hello, File!");
+            fclose(fp);
+
+            // Reading from a file
+            char buffer[100];
+            fp = fopen("data.txt", "r");
+            fgets(buffer, 100, fp);
+            printf("%s", buffer);
+            fclose(fp);
+        </pre>
+
+        <h3>Error Handling with File Operations</h3>
+        <p>Checking if a file operation was successful to prevent errors.</p>
+        <pre>
+            FILE *fp = fopen("data.txt", "r");
+            if (fp == NULL) {
+                printf("Error opening file!");
+            } else {
+                fclose(fp);
+            }
+        </pre>
+    </div>
 </body>
 </html>
