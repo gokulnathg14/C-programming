@@ -538,7 +538,8 @@
     button:hover { background: #218838; }
 </style>
 
-<div class="forum-container">
+<body onload="loadPosts()">
+    <div class="forum-container">
         <h2>Discussion Forum</h2>
         <input type="text" id="username" placeholder="Enter your name">
         <input type="text" id="newPost" placeholder="Write a post...">
@@ -547,16 +548,36 @@
     </div>
     
     <script>
+        function loadPosts() {
+            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
+            let postsContainer = document.getElementById("posts");
+            postsContainer.innerHTML = "";
+            posts.forEach(post => {
+                let postElement = document.createElement("div");
+                postElement.className = "post";
+                postElement.innerHTML = `<strong>${post.username}:</strong> ${post.text} <br>
+                    <button onclick='addReply(this)'>Reply</button>`;
+                
+                post.replies.forEach(reply => {
+                    let replyDiv = document.createElement("div");
+                    replyDiv.className = "reply";
+                    replyDiv.innerHTML = `<strong>Reply:</strong> ${reply}`;
+                    postElement.appendChild(replyDiv);
+                });
+                
+                postsContainer.appendChild(postElement);
+            });
+        }
+        
         function addPost() {
             let username = document.getElementById("username").value.trim();
             let postText = document.getElementById("newPost").value.trim();
             if (!username || !postText) return alert("Please enter a name and a post!");
             
-            let postContainer = document.createElement("div");
-            postContainer.className = "post";
-            postContainer.innerHTML = `<strong>${username}:</strong> ${postText} <br>
-                <button onclick='addReply(this)'>Reply</button>`;
-            document.getElementById("posts").appendChild(postContainer);
+            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
+            posts.push({ username, text: postText, replies: [] });
+            localStorage.setItem("forumPosts", JSON.stringify(posts));
+            loadPosts();
             document.getElementById("newPost").value = "";
         }
         
@@ -564,13 +585,13 @@
             let replyText = prompt("Enter your reply:");
             if (!replyText) return;
             
-            let replyDiv = document.createElement("div");
-            replyDiv.className = "reply";
-            replyDiv.innerHTML = `<strong>Reply:</strong> ${replyText}`;
-            button.parentElement.appendChild(replyDiv);
+            let postIndex = Array.from(document.getElementById("posts").children).indexOf(button.parentElement);
+            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
+            posts[postIndex].replies.push(replyText);
+            localStorage.setItem("forumPosts", JSON.stringify(posts));
+            loadPosts();
         }
     </script>
-   
-</div>
+</body>
 </body>
 </html>
