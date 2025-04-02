@@ -548,24 +548,45 @@
     </div>
     
     <script>
+        // Firebase configuration (Replace with your own Firebase config)
+        const firebaseConfig = {
+  apiKey: "AIzaSyAx--TRZ4ZZ9KvWGPM0O7XhtcjGbtak-vs",
+  authDomain: "c-programming-aee09.firebaseapp.com",
+  projectId: "c-programming-aee09",
+  storageBucket: "c-programming-aee09.firebasestorage.app",
+  messagingSenderId: "866052208215",
+  appId: "1:866052208215:web:db1bfba91f8e12e9ed1512",
+  measurementId: "G-J61X0PZN45"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
         function loadPosts() {
-            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
-            let postsContainer = document.getElementById("posts");
+            const postsContainer = document.getElementById("posts");
             postsContainer.innerHTML = "";
-            posts.forEach(post => {
-                let postElement = document.createElement("div");
-                postElement.className = "post";
-                postElement.innerHTML = `<strong>${post.username}:</strong> ${post.text} <br>
-                    <button onclick='addReply(this)'>Reply</button>`;
-                
-                post.replies.forEach(reply => {
-                    let replyDiv = document.createElement("div");
-                    replyDiv.className = "reply";
-                    replyDiv.innerHTML = `<strong>Reply:</strong> ${reply}`;
-                    postElement.appendChild(replyDiv);
+            
+            db.collection("posts").orderBy("timestamp").onSnapshot(snapshot => {
+                postsContainer.innerHTML = "";
+                snapshot.forEach(doc => {
+                    let post = doc.data();
+                    let postElement = document.createElement("div");
+                    postElement.className = "post";
+                    postElement.innerHTML = `<strong>${post.username}:</strong> ${post.text} <br>
+                        <button onclick='addReply("${doc.id}")'>Reply</button>`;
+                    
+                    if (post.replies) {
+                        post.replies.forEach(reply => {
+                            let replyDiv = document.createElement("div");
+                            replyDiv.className = "reply";
+                            replyDiv.innerHTML = `<strong>Reply:</strong> ${reply}`;
+                            postElement.appendChild(replyDiv);
+                        });
+                    }
+                    
+                    postsContainer.appendChild(postElement);
                 });
-                
-                postsContainer.appendChild(postElement);
             });
         }
         
@@ -574,22 +595,24 @@
             let postText = document.getElementById("newPost").value.trim();
             if (!username || !postText) return alert("Please enter a name and a post!");
             
-            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
-            posts.push({ username, text: postText, replies: [] });
-            localStorage.setItem("forumPosts", JSON.stringify(posts));
-            loadPosts();
+            db.collection("posts").add({
+                username: username,
+                text: postText,
+                replies: [],
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
             document.getElementById("newPost").value = "";
         }
         
-        function addReply(button) {
+        function addReply(postId) {
             let replyText = prompt("Enter your reply:");
             if (!replyText) return;
             
-            let postIndex = Array.from(document.getElementById("posts").children).indexOf(button.parentElement);
-            let posts = JSON.parse(localStorage.getItem("forumPosts")) || [];
-            posts[postIndex].replies.push(replyText);
-            localStorage.setItem("forumPosts", JSON.stringify(posts));
-            loadPosts();
+            let postRef = db.collection("posts").doc(postId);
+            postRef.update({
+                replies: firebase.firestore.FieldValue.arrayUnion(replyText)
+            });
         }
     </script>
 </body>
